@@ -6,11 +6,89 @@
 <script src="script.js"></script>
 <title>Moldura</title>
 
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+    font-family: Arial, sans-serif;
+  }
+
+  video, canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  .frame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+  }
+
+  button {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,.3);
+  }
+</style>
 </head>
 
 <body>
-  <video autoplay playsinline id="camera"></video>
-  <img src="moldura.png" class="frame" />
+
+<video id="camera" autoplay playsinline></video>
+<img src="moldura.png" class="frame" id="frame">
+<canvas id="canvas"></canvas>
+
+<button onclick="tirarFoto()">📸 Tirar foto</button>
+
+<script>
+const video = document.getElementById("camera");
+const canvas = document.getElementById("canvas");
+const frame = document.getElementById("frame");
+const ctx = canvas.getContext("2d");
+
+// Ativar câmera
+navigator.mediaDevices.getUserMedia({
+  video: { facingMode: "user" },
+  audio: false
+}).then(stream => {
+  video.srcObject = stream;
+}).catch(err => {
+  alert("Não foi possível acessar a câmera");
+});
+
+// Tirar foto
+function tirarFoto() {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  // Desenha a câmera
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Desenha a moldura
+  ctx.drawImage(frame, 0, 0, canvas.width, canvas.height);
+
+  // Salvar imagem
+  const link = document.createElement("a");
+  link.download = "foto-evento.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
 
 </body>
 </html>
