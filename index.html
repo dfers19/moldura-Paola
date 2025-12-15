@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="script.js"></script>
+<title>Moldura do Evento</title>
+
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+  }
+
+  video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  .frame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+  }
+</style>
+</head>
+
+<body>
+  <video autoplay playsinline id="camera"></video>
+  <img src="moldura.png" class="frame" />
+
+<script>
+  const video = document.getElementById("camera");
+
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+    .then(stream => video.srcObject = stream)
+    .catch(err => alert("Erro ao acessar a câmera"));
+</script>
+
+</body>
+</html>
