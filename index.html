@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moldura</title>
 
 <style>
@@ -54,11 +53,10 @@
 <img src="moldura.png" class="frame" id="frame">
 <canvas id="canvas"></canvas>
 
-<button onclick="tirarFoto()">📸 Tirar foto</button>
+<button onclick="tirarFoto()">📸</button>
 
 <script>
 const video = document.getElementById("camera");
-const canvas = document.getElementById("canvas");
 const frame = document.getElementById("frame");
 const ctx = canvas.getContext("2d");
 
