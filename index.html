@@ -17,8 +17,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 1080px;
-    height: 1920px;
+    width: 100%;
     object-fit: cover;
   }
 
@@ -26,8 +25,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 1080px;
-    height: 1920px;
+    width: 100%;
     pointer-events: none;
   }
 </style>
@@ -36,14 +34,6 @@
 <body>
   <video autoplay playsinline id="camera"></video>
   <img src="moldura.png" class="frame" />
-
-<script>
-  const video = document.getElementById("camera");
-
-  navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
-    .then(stream => video.srcObject = stream)
-    .catch(err => alert("Erro ao acessar a câmera"));
-</script>
 
 </body>
 </html>
